@@ -1,0 +1,48 @@
+name: Node.js CD
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            set -e  # Выход при ошибке любой команды
+            
+            cd ./botHolst
+            
+            pm2 stop "holstBot"
+            
+            echo "Pulling latest changes..."
+            git pull origin master
+            
+            echo "Installing system dependencies..."
+            if ! command -v magick >/dev/null 2>&1; then
+              sudo apt-get update
+              sudo apt-get install -y imagemagick libheif1
+            fi
+            
+            echo "Installing dependencies..."
+            npm install  # или bun install
+            
+            echo "Building application..."
+            npm run build
+            
+            echo "Restarting application..."
+            
+            pm2 start dist/app.js --name "holstBot"
+            
+            echo "Deployment completed successfully!"

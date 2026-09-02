@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+//    "skipDefaultLibCheck": true
+//    "paths": {
+//      "@/config/*": ["./src/app/config/*"],
+//      "@/routes": ["./src/bot/routes/routes"],
+//      "@/services/*": ["./src/services/*"],
+//      "@/utils": ["./src/utils/index"],
+//      "@/hooks": ["./src/hooks/index"],
+//    }
+  }
+}

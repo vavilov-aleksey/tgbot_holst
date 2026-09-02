@@ -1,0 +1,8 @@
+/dist
+/node_modules
+.env
+.idea
+sessions.json
+sessions-backups/
+credentialsGoogle.json
+services-account.json

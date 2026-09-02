@@ -1,0 +1,1 @@
+export { yaDiskService } from "./yaDiskService";

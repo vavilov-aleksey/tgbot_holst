@@ -1,0 +1,44 @@
+{
+  "name": "tgbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "node dist/app.js",
+    "watch:build": "tsc -p . --watch",
+    "start:dev": "npm run build && npm run start",
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "axios": "^1.7.9",
+    "cron": "^4.3.0",
+    "dayjs": "^1.11.19",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "googleapis": "^105.0.0",
+    "handlebars": "^4.7.8",
+    "pdf-lib": "^1.17.1",
+    "pdf2pic": "^3.2.0",
+    "retry-axios": "^4.0.1",
+    "sharp": "^0.34.5",
+    "telegraf": "^4.16.3",
+    "telegraf-session-local": "^2.1.1",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.7.9",
+    "@swc/core": "^1.15.2",
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.10.7",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
