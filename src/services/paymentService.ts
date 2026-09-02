@@ -9,7 +9,7 @@ import { CERTIFICATE_NAME } from "../app/constants/constants.certificate";
 import { consoleLogWithTime } from "../utils/consoleLogWithTime";
 import { ADMIN_ID, SUPER_ADMIN_ID } from "../app/constants/constants.settings";
 
-import * as https from "node:https";
+// import * as https from "node:https";
 
 export enum OrderStatusEnum {
   register = 0, // Заказ зарегистрирован, но не оплачен.
@@ -58,9 +58,9 @@ class PaymentService {
       baseURL: this.config.baseURL,
       headers: { Authorization: this.config.token },
       // только для локальной разработки
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: true,
-      }),
+      // httpsAgent: new https.Agent({
+      //   rejectUnauthorized: true,
+      // }),
     });
   }
 
