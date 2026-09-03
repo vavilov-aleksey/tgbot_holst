@@ -14,7 +14,6 @@ import {
 import { useGlobalState } from "../../hooks/useGlobalState";
 import { editMessageText } from "../../features/editMessageText";
 import { loaderCreateOrder } from "../../template/sucessPayment";
-import { runPostPaymentProcessing } from "../commands/payment/statusPayment";
 
 export class SavePhotoScenes {
   constructor(private bot: any) {}
@@ -47,10 +46,8 @@ export class SavePhotoScenes {
 
       const message = await ctx.replyWithHTML(loaderCreateOrder({}));
 
-      if (false) {
-        await confirmAndPay(ctx);
-      }
-      await runPostPaymentProcessing(ctx);
+      await confirmAndPay(ctx);
+
       try {
         await ctx.deleteMessage(message.message_id);
       } catch (e) {

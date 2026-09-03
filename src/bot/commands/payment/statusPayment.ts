@@ -15,7 +15,7 @@ import { googleCertificateService } from "../../../services/Google/GoogleCertifi
 import { CertificateEnum } from "../../../app/types/certificateType";
 import { registerDelivery } from "./registerDelivery";
 
-export const runPostPaymentProcessing = async (ctx: TBotContext) => {
+const runPostPaymentProcessing = async (ctx: TBotContext) => {
   const { setIsGlobalLoading, getOrderInfo } = useSessionInfo(ctx);
 
   try {
