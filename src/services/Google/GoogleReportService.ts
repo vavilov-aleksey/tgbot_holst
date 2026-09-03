@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { MonthEnum } from "./MonthEnum";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { StatusOrderEnum } from "./GoogleTypes";
+import { configGoogleTables } from "./configGoogleTables";
 
 dayjs.extend(customParseFormat);
 
@@ -11,7 +12,7 @@ const COUNT_DAY = 20;
 
 class GoogleReportService extends GoogleBaseService {
   private readonly REPORT_SPREADSHEET_ID =
-    "1Ff1Dvm-oNQHBY2iLxH_wweQMHkbO4O1iY5zhuVdIzlA";
+    configGoogleTables.main.spreadsheetId;
 
   async addReport(data: ReportType) {
     const values = [
