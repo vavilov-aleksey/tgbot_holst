@@ -22,7 +22,7 @@ jobs:
           script: |
             set -e  # Выход при ошибке любой команды
             
-            cd ./botHolst
+            cd ./tgbot_holst
             
             pm2 stop "holstBot"
             

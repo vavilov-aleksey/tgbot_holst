@@ -184,7 +184,7 @@ class Bot {
       this.bot.launch({
         webhook: {
           domain: "paryginphoto.ru",
-          port: 8090,
+          port: 8091,
           hookPath: "/webhook-holst",
         },
       });
@@ -329,11 +329,11 @@ class Bot {
 const bot = new Bot(new GetEnvKey());
 void bot.init();
 
-// cd ./botPhoto/
-// pm2 stop photoBot
+// cd ./tgbot_holst/
+// pm2 stop holstBot
 // git pull origin master
 // bun run build
-// pm2 start dist/app.js --name photoBot
+// pm2 start dist/app.js --name holstBot
 // pm2 flush
 // pm2 logs --lines 10000
 // Настройка nginx
