@@ -1,9 +1,9 @@
 import Handlebars from "handlebars";
 
 type StartTemplateProps = {
-  pricePrintWithBorder: number;
-  pricePrintWithoutBorder: number;
-  minOrder: number;
+  pricePrintSmall: number;
+  pricePrintBig: number;
+  minOrder: string;
   priceDelivery: number;
   urlOfferta: string;
 };
@@ -11,13 +11,13 @@ type StartTemplateProps = {
 export const startTemplate = Handlebars.compile<StartTemplateProps>(`
 <tg-emoji emoji-id="5440431182602842059">👋</tg-emoji> <b>Добро пожаловать в наш бот печати на холсте!</b>  
 
-Мы печатаем ваши фото на качественном холсте в формате <b>40×50 см</b>.
+Мы печатаем изображения на качественном холсте.
 
-У нас есть два варианта оформления:
-🖼 <b>С рамкой (с полями для багета)</b> — изображение печатается с дополнительными белыми полями по краям (технический запас). Это позволяет легко натянуть холст на подрамник или вставить в багетную раму, не теряя значимых деталей снимка {{pricePrintWithBorder}} рублей.
-📐 <b>Без рамки</b> — печать точно по размеру 40×50 см, без технологических полей по краям {{pricePrintWithoutBorder}} рублей.
+Вы можете выбрать один из двух размеров:
+📐 <b>40×50 см</b> — {{pricePrintSmall}} рублей.
+📐 <b>50×70 см</b> — {{pricePrintBig}} рублей.
 
-Минимальный заказ — от <b>{{minOrder}} холста</b>. 🛒
+Минимальный заказ — от <b>{{minOrder}}</b>. 🛒
 
 🚚 Доставка СДЕК по всей России за {{priceDelivery}} рублей.
 

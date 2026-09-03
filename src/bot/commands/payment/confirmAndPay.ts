@@ -1,5 +1,5 @@
 import { useSessionInfo } from "../../../hooks";
-import { PRICE_DELIVERY_POCHTA } from "../../../app/constants/constants.price";
+import { PRICE_DELIVERY } from "../../../app/constants/constants.price";
 import { createInlineKeyboard } from "../../../utils";
 import { paymentService } from "../../../services/paymentService";
 import { TBotContext, TContextPrintType } from "../../../app/types";
@@ -51,7 +51,7 @@ const paymentCard = async (ctx: TBotContext) => {
         printType,
         printTypeName: getPrintTypeName[printType as TContextPrintType],
         pricePhoto: totalPricePhoto,
-        priceDelivery: isFreeDelivery ? 0 : PRICE_DELIVERY_POCHTA,
+        priceDelivery: isFreeDelivery ? 0 : PRICE_DELIVERY,
         totalPrice: totalPriceWithDelivery,
         giftCount: Number(freePhoto) || undefined,
       }),

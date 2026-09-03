@@ -49,3 +49,7 @@ export const certificateAlreadyUsedTemplate = Handlebars.compile<{
 export const loaderSearchCertificateTemplate = Handlebars.compile(`
 <tg-emoji emoji-id="5231012545799666522">🔍</tg-emoji> <b>Проверяем сертификат...</b>
 `);
+
+export const loaderCreateCertificateTemplate = Handlebars.compile(`
+<tg-emoji emoji-id="5386367538735104399">⌛</tg-emoji> <b>Формируем заказ...</b>
+`);

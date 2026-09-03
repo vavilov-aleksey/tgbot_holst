@@ -8,7 +8,7 @@ import {
   START_ROUTE,
   STATUS_ROUTE,
 } from "./routes";
-import { PRICE_DELIVERY_POCHTA } from "../app/constants/constants.price";
+import { PRICE_DELIVERY } from "../app/constants/constants.price";
 import { SUPPORT_TG_SUPPORT } from "../app/constants/constants.support";
 
 const navigationStartRoute = {
@@ -62,14 +62,14 @@ export const configFaq = {
 
 Мы отправляем ваши холсты <b>СДЭК</b>.
 
-✅ <b>Стоимость доставки:</b> ${PRICE_DELIVERY_POCHTA} рублей.  
+✅ <b>Стоимость доставки:</b> ${PRICE_DELIVERY} рублей.  
 ✅ <b>Срок доставки:</b> 3–7 дней (в зависимости от региона).  
 ✅ <b>Трек-номер:</b> пришлём после отправки, вместе со ссылкой для отслеживания.`,
     navigation: navigationCommon,
   },
 
   [FAQ_EXAMPLE_ROUTE]: {
-    text: `Пример с рамкой и без`,
+    text: `Пример разных размеров`,
     navigation: navigationCommon,
   },
 

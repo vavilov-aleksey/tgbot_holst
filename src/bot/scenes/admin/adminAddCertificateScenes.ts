@@ -11,9 +11,9 @@ import { googleCertificateService } from "../../../services/Google/GoogleCertifi
 import { v4 as uuidv4 } from "uuid";
 import { getCurrentDateMoscow } from "../../../utils/getCurrentDate";
 import {
-  CERTIFICATE_100,
-  CERTIFICATE_300,
-  CERTIFICATE_500,
+  CERTIFICATE_1,
+  CERTIFICATE_3,
+  CERTIFICATE_5,
   CERTIFICATE_CONFIG,
 } from "../../../app/constants/constants.certificate";
 import { CertificateEnum } from "../../../app/types/certificateType";
@@ -36,16 +36,16 @@ export class AdminAddCertificateScenes {
           startAddCertificateTemplate({}),
           createInlineKeyboard([
             {
-              action: CERTIFICATE_100,
-              label: `${CERTIFICATE_CONFIG[CERTIFICATE_100].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_100].price} ₽`,
+              action: CERTIFICATE_1,
+              label: `${CERTIFICATE_CONFIG[CERTIFICATE_1].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_1].price} ₽`,
             },
             {
-              action: CERTIFICATE_300,
-              label: `${CERTIFICATE_CONFIG[CERTIFICATE_300].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_300].price} ₽`,
+              action: CERTIFICATE_3,
+              label: `${CERTIFICATE_CONFIG[CERTIFICATE_3].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_3].price} ₽`,
             },
             {
-              action: CERTIFICATE_500,
-              label: `${CERTIFICATE_CONFIG[CERTIFICATE_500].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_500].price} ₽`,
+              action: CERTIFICATE_5,
+              label: `${CERTIFICATE_CONFIG[CERTIFICATE_5].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_5].price} ₽`,
             },
           ]),
         );
@@ -61,7 +61,7 @@ export class AdminAddCertificateScenes {
           await ctx.answerCbQuery();
 
           if (
-            [CERTIFICATE_100, CERTIFICATE_300, CERTIFICATE_500].includes(
+            [CERTIFICATE_1, CERTIFICATE_3, CERTIFICATE_5].includes(
               ctx.callbackQuery.data,
             )
           ) {

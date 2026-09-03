@@ -13,12 +13,13 @@ import { useGlobalState } from "../../hooks/useGlobalState";
 import { consoleLogWithTime } from "../../utils/consoleLogWithTime";
 import { startTemplate } from "../../template/start.template";
 import { MIN_COUNT_ORDER } from "../../app/constants/constants.order";
-import {
-  PRICE_DELIVERY_POCHTA,
-  PRICE_PRINT_TYPE_WITH_BORDER,
-  PRICE_PRINT_TYPE_WITHOUT_BORDER,
-} from "../../app/constants/constants.price";
 import { URL_OFFERTA } from "../../app/constants/constants.settings";
+import {
+  PRICE_DELIVERY,
+  PRICE_PRINT_TYPE_BIG,
+  PRICE_PRINT_TYPE_SMALL,
+} from "../../app/constants/constants.price";
+import { pluralize } from "../../utils/pluralize";
 
 export const handleStartAction = async (ctx: TBotContext) => {
   if (ctx.callbackQuery) {
@@ -37,10 +38,10 @@ export const handleStartAction = async (ctx: TBotContext) => {
 
   await ctx.replyWithHTML(
     startTemplate({
-      minOrder: MIN_COUNT_ORDER,
-      pricePrintWithBorder: PRICE_PRINT_TYPE_WITH_BORDER,
-      pricePrintWithoutBorder: PRICE_PRINT_TYPE_WITHOUT_BORDER,
-      priceDelivery: PRICE_DELIVERY_POCHTA,
+      minOrder: `${MIN_COUNT_ORDER} ${pluralize(MIN_COUNT_ORDER, "холста", "холстов", "холстов")}`,
+      pricePrintSmall: PRICE_PRINT_TYPE_SMALL,
+      pricePrintBig: PRICE_PRINT_TYPE_BIG,
+      priceDelivery: PRICE_DELIVERY,
       urlOfferta: URL_OFFERTA,
     }),
     {

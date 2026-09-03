@@ -1,11 +1,9 @@
 import { GetEnvKey } from "../../features/getEnvKey";
 
-export const PRICE_PRINT_TYPE_WITH_BORDER = Number(
-  new GetEnvKey().get("PRICE_PRINT_TYPE_WITH_BORDER"),
+export const PRICE_PRINT_TYPE_SMALL = Number(
+  new GetEnvKey().get("PRICE_PRINT_TYPE_SMALL"),
 );
-export const PRICE_PRINT_TYPE_WITHOUT_BORDER = Number(
-  new GetEnvKey().get("PRICE_PRINT_TYPE_WITHOUT_BORDER"),
+export const PRICE_PRINT_TYPE_BIG = Number(
+  new GetEnvKey().get("PRICE_PRINT_TYPE_BIG"),
 );
-export const PRICE_DELIVERY_POCHTA = Number(
-  new GetEnvKey().get("PRICE_DELIVERY"),
-);
+export const PRICE_DELIVERY = Number(new GetEnvKey().get("PRICE_DELIVERY"));

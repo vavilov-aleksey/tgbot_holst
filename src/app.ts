@@ -20,6 +20,7 @@ import { cleanupOldSessions } from "./utils/cleanupOldSessions";
 import { useSessionInfo } from "./hooks";
 import { commandsProvider } from "./bot/commands";
 import { scenesProvider } from "./bot/scenes";
+import { handleCertificateSuccessPayment } from "./bot/commands/certificate";
 
 class Bot {
   bot: Telegraf<TBotContext>;
@@ -297,17 +298,25 @@ class Bot {
             paymentData.operation === "deposited" &&
             !!Number(paymentData?.approvedAmount)
           ) {
-            await successStatusPayment(
-              mockCtx,
-              paymentData?.approvedAmount!,
-              paymentData?.paymentDate!,
-            );
+            if (isCertificatePayment) {
+              await handleCertificateSuccessPayment(mockCtx, {
+                amount: paymentData?.approvedAmount! / 100,
+                date: paymentData?.paymentDate!,
+                orderId: paymentData?.orderNumber!,
+              });
+            } else {
+              await successStatusPayment(
+                mockCtx,
+                paymentData?.approvedAmount!,
+                paymentData?.paymentDate!,
+              );
 
-            await saveReportGoogle(mockCtx, {
-              amount: paymentData?.approvedAmount! / 100,
-              date: paymentData?.paymentDate!,
-              orderId: paymentData?.orderNumber!,
-            });
+              await saveReportGoogle(mockCtx, {
+                amount: paymentData?.approvedAmount! / 100,
+                date: paymentData?.paymentDate!,
+                orderId: paymentData?.orderNumber!,
+              });
+            }
           } else if (paymentData.operation === "declinedByTimeout") {
             console.log(
               `DeclinedByTimeout: ${JSON.stringify(paymentData)}, userId: ${userId}`,

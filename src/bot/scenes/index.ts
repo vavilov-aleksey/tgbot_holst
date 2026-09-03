@@ -15,6 +15,7 @@ import { AdminAddCertificateScenes } from "./admin/adminAddCertificateScenes";
 import { AdminCheckFolderScenes } from "./admin/adminCheckFolderScenes";
 import { AdminSaveFixPhotoScenes } from "./admin/adminSaveFixPhotoScenes";
 import { AdminGetPhotosCountByDateScenes } from "./admin/adminGetPhotosCountByDateScenes";
+import { CertificateScene } from "./certificateScene";
 
 export const scenesProvider = (thisBot: any) =>
   new Scenes.Stage<TBotContext>([
@@ -28,6 +29,7 @@ export const scenesProvider = (thisBot: any) =>
     new AdminSendMessageRegularScenes(thisBot).handle(),
     new AdminSendMessageScenes(thisBot).handle(),
     new FeedbackScenes().handle(),
+    new CertificateScene().handle(),
     new AdminAddGiftScenes().handle(),
     new AdminAddCertificateScenes().handle(),
     new AdminCheckFolderScenes().handle(),

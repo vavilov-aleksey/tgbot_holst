@@ -1,7 +1,7 @@
 import { TBotContext } from "../app/types";
 import { CertificateEnum } from "../app/types/certificateType";
 import { useSessionInfo } from "./useSession";
-import { PRICE_DELIVERY_POCHTA } from "../app/constants/constants.price";
+import { PRICE_DELIVERY } from "../app/constants/constants.price";
 
 export const useOrderResult = (
   ctx: TBotContext,
@@ -53,7 +53,7 @@ export const useOrderResult = (
       numberOfPhoto: countPhoto,
       totalPricePhoto: typePhoto * resultCountCalculation,
       totalPriceWithDelivery:
-        typePhoto * resultCountCalculation + PRICE_DELIVERY_POCHTA,
+        typePhoto * resultCountCalculation + PRICE_DELIVERY,
       freePhoto: Number(freePhoto) || undefined,
     };
   }
@@ -68,7 +68,7 @@ export const useOrderResult = (
       numberOfPhoto: countPhoto,
       totalPricePhoto: typePhoto * resultCountCalculation,
       totalPriceWithDelivery:
-        typePhoto * resultCountCalculation + PRICE_DELIVERY_POCHTA,
+        typePhoto * resultCountCalculation + PRICE_DELIVERY,
       freePhoto: countBonus,
     };
   }
@@ -77,6 +77,6 @@ export const useOrderResult = (
   return {
     numberOfPhoto: countPhoto,
     totalPricePhoto: typePhoto * countPhoto,
-    totalPriceWithDelivery: typePhoto * countPhoto + PRICE_DELIVERY_POCHTA,
+    totalPriceWithDelivery: typePhoto * countPhoto + PRICE_DELIVERY,
   };
 };

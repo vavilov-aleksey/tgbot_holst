@@ -42,6 +42,7 @@ export const ADMIN_CHECK_FOLDER_ROUTE = "admin_check_folder";
 export const ADMIN_SAVE_FIX_PHOTO_ROUTE = "admin_save_fix_photo";
 export const ADMIN_GET_PHOTOS_COUNT_ROUTE = "admin_get_photos_count";
 
+export const CERTIFICATE_ROUTE = "certificate";
 export const CREATE_ORDER_CERTIFICATE_ROUTE = "create_order_certificate_route";
 
 export const FEEDBACK_ROUTE = "feedback";

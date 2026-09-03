@@ -1,6 +1,6 @@
 import {
-  PRICE_PRINT_TYPE_WITH_BORDER,
-  PRICE_PRINT_TYPE_WITHOUT_BORDER,
+  PRICE_PRINT_TYPE_BIG,
+  PRICE_PRINT_TYPE_SMALL,
 } from "../constants/constants.price";
 import { Context, Scenes } from "telegraf";
 import { CertificateEnum } from "./certificateType";
@@ -25,8 +25,8 @@ export type TContextDeliveryInfo = {
 };
 
 export type TContextPrintType =
-  | typeof PRICE_PRINT_TYPE_WITH_BORDER
-  | typeof PRICE_PRINT_TYPE_WITHOUT_BORDER;
+  | typeof PRICE_PRINT_TYPE_SMALL
+  | typeof PRICE_PRINT_TYPE_BIG;
 
 export type PaymentInfoType = {
   orderId: string;
