@@ -52,11 +52,11 @@ export const orderConfirmCertificateOverPriceTemplate = Handlebars.compile<{
 
 ✅ <b>Количество фото:</b> {{photosCount}} шт.  
 ✅ <b>Тип фото:</b> {{printTypeName}} - {{printType}} руб/фото
-✅ <b>Сертификат:</b> покрывает {{certificateCount}} фото
-✅ <b>Дополнительно:</b> {{overCount}} фото
+✅ <b>Сертификат:</b> покрывает {{certificateCount}} холст
+✅ <b>Дополнительно:</b> {{overCount}} холст
 ✅ <b>Доставка:</b> бесплатно по сертификату
 
-💸 <b>Доплата за {{overCount}} фото:</b> {{totalPrice}} рублей
+💸 <b>Доплата за {{overCount}} холст:</b> {{totalPrice}} рублей
 
 Если всё верно, нажмите <b>"Оплатить заказ"</b>, чтобы перейти к оплате.
 

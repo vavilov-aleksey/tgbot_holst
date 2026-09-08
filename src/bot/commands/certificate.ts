@@ -28,6 +28,7 @@ import { getCurrentDateMoscow } from "../../utils/getCurrentDate";
 import { CertificateEnum } from "../../app/types/certificateType";
 import { orderInProgressTemplate } from "../../template/orderInProgress.template";
 import { consoleLogWithTime } from "../../utils/consoleLogWithTime";
+import { pluralize } from "../../utils/pluralize";
 
 export const handleCertificateAction = async (ctx: TBotContext) => {
   const { setCertificate, certificateInfo, isGlobalLoading } =
@@ -105,7 +106,7 @@ export const handleCertificateSuccessPayment = async (
       },
       {
         caption: certificateSuccessTemplate({
-          countPhoto: certificateInfo?.count!,
+          countPhoto: `${certificateInfo?.count} ${pluralize(certificateInfo?.count!, "холст", "холста", "холстов")}`,
           numberCertificate: uniqId,
         }),
         parse_mode: "HTML",

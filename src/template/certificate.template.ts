@@ -8,7 +8,7 @@ export const certificatePriceTemplate = Handlebars.compile<{
 🧾 <b>Ваш заказ:</b>
 
 📱 <b>Телефон:</b> {{phone}}
-🎁 <b>Сертификат:</b> {{countPhoto}} фото с доставкой
+🎁 <b>Сертификат:</b> {{countPhoto}} холст с доставкой
 💸 <b>Сумма к оплате:</b> {{price}} ₽
 
 Если всё верно, нажмите <b>"Оплатить заказ"</b>, чтобы перейти к оплате.
@@ -17,12 +17,12 @@ export const certificatePriceTemplate = Handlebars.compile<{
 `);
 
 export const certificateSuccessTemplate = Handlebars.compile<{
-  countPhoto: number;
+  countPhoto: string;
   numberCertificate: string;
 }>(`
 🎉 <b>Оплата прошла успешно!</b>
 
-🎁 <b>Сертификат:</b> {{countPhoto}} фото + доставка
+🎁 <b>Сертификат:</b> {{countPhoto}} + доставка
 
 🔢 <b>Номер сертификата:</b> <code>{{numberCertificate}}</code>
 
