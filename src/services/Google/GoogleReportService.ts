@@ -8,7 +8,7 @@ import { configGoogleTables } from "./configGoogleTables";
 
 dayjs.extend(customParseFormat);
 
-const COUNT_DAY = 20;
+const COUNT_DAY = 7;
 
 class GoogleReportService extends GoogleBaseService {
   private readonly REPORT_SPREADSHEET_ID =

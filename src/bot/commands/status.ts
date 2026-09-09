@@ -11,11 +11,11 @@ import {
 import { StatusOrderEnum } from "../../services/Google/GoogleTypes";
 import { createInlineKeyboard } from "../../utils";
 import { SUPPORT_TG_SUPPORT } from "../../app/constants/constants.support";
-import { consoleLogWithTime } from "../../utils/consoleLogWithTime";
 
 export const handleStatusAction = async (ctx: TBotContext) => {
-  consoleLogWithTime("Проверка статуса заказа: ", ctx);
-  const message = await ctx.replyWithHTML(`Уточняем статус, ожидайте...`);
+  const message = await ctx.replyWithHTML(
+    `<tg-emoji emoji-id="5231012545799666522">🔍</tg-emoji> Уточняем статус, ожидайте...`,
+  );
 
   const { status } = await googleReportService.checkDateOrder(
     ctx?.from?.id?.toString()!,
