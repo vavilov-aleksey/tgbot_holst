@@ -19,11 +19,11 @@ const giftText = (info: TContextSession["user"]["orderInfo"]) => {
   const certificate = info?.certificate;
 
   if (certificate?.type === CertificateEnum.certificate) {
-    return `Подарочный сертификат на ${certificate.count} фото`;
+    return `Подарочный сертификат на ${certificate.count} холст(а)`;
   }
 
   if (certificate?.type === CertificateEnum.freeGift) {
-    return `${certificate.count} фото в подарок`;
+    return `${certificate.count} холст(а) в подарок`;
   }
 
   if (certificate?.type === CertificateEnum.freeDelivery) {
@@ -31,7 +31,7 @@ const giftText = (info: TContextSession["user"]["orderInfo"]) => {
   }
 
   if (certificate?.type === CertificateEnum.bonusPerValue) {
-    return `${certificate.count} фото в подарок за каждые 100 фото`;
+    return `${certificate.count} холст(а) в подарок за каждые 100 изображений`;
   }
 
   return null;

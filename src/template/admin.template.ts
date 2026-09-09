@@ -9,7 +9,7 @@ export const startSendMessageTemplate = Handlebars.compile(`
 export const startAddGiftTemplate = Handlebars.compile(`
 🎁 <b>Добавление подарка</b>
 
-Введите количество фото для подарка:
+Введите количество холстов для подарка:
 • Только цифры
 • Без пробелов и символов
 `);
@@ -23,7 +23,7 @@ export const startAddCertificateTemplate = Handlebars.compile(`
 export const checkAddedGiftTemplate = Handlebars.compile<{
   countPhoto: number;
 }>(`
-🎁 Количество фото: <b>{{countPhoto}} шт.</b>
+🎁 Количество холстов: <b>{{countPhoto}} шт.</b>
 
 Для подтверждения нажмите <b>"Сохранить"</b>
 `);
@@ -39,7 +39,7 @@ export const successGiftPhotoTemplate = Handlebars.compile<{
 ✨ <b>Сертификат сохранен!</b>
 
 🔢 Номер сертификата: <code>{{uniqId}}</code>
-📸 Количество фото: {{countPhoto}}
+📸 Количество холстов: {{countPhoto}}
 `);
 
 export const successGiftDeliveryTemplate = Handlebars.compile<{
@@ -58,6 +58,6 @@ export const successGiftCertificateTemplate = Handlebars.compile<{
 ✨ <b>Сертификат сохранен!</b>
 
 🔢 Номер сертификата: <code>{{uniqId}}</code>
-📸 Количество фото: {{countPhoto}}
+📸 Количество холстов: {{countPhoto}}
 🚚 Доставка бесплатно
 `);

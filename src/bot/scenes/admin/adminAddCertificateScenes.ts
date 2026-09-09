@@ -37,15 +37,15 @@ export class AdminAddCertificateScenes {
           createInlineKeyboard([
             {
               action: CERTIFICATE_1,
-              label: `${CERTIFICATE_CONFIG[CERTIFICATE_1].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_1].price} ₽`,
+              label: `${CERTIFICATE_CONFIG[CERTIFICATE_1].count} холст - ${CERTIFICATE_CONFIG[CERTIFICATE_1].price} ₽`,
             },
             {
               action: CERTIFICATE_3,
-              label: `${CERTIFICATE_CONFIG[CERTIFICATE_3].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_3].price} ₽`,
+              label: `${CERTIFICATE_CONFIG[CERTIFICATE_3].count} холста - ${CERTIFICATE_CONFIG[CERTIFICATE_3].price} ₽`,
             },
             {
               action: CERTIFICATE_5,
-              label: `${CERTIFICATE_CONFIG[CERTIFICATE_5].count} фото - ${CERTIFICATE_CONFIG[CERTIFICATE_5].price} ₽`,
+              label: `${CERTIFICATE_CONFIG[CERTIFICATE_5].count} холстов - ${CERTIFICATE_CONFIG[CERTIFICATE_5].price} ₽`,
             },
           ]),
         );
