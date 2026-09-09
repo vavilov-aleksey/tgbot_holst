@@ -33,7 +33,7 @@ export class AdminAddGiftScenes {
           `Какой подарок хотите добавить?`,
 
           createInlineKeyboard([
-            { label: "📷 Фото в подарок", action: "photo_free" },
+            { label: "📷 Холст в подарок", action: "photo_free" },
             { label: "🚚 Доставка в подарок", action: "delivery_free" },
           ]),
         );
@@ -94,7 +94,7 @@ export class AdminAddGiftScenes {
       // step 2
       async (ctx) => {
         if (!ctx.message || !ctx.message.text) {
-          await ctx.reply("Введите количество фото для подарка.");
+          await ctx.reply("Введите количество холстов для подарка.");
           return;
         }
 
@@ -161,7 +161,7 @@ export class AdminAddGiftScenes {
             // Выходим из сцены
             return ctx.scene.leave();
           } else if (ctx.callbackQuery.data === "cancel_mailing") {
-            await ctx.editMessageText("❌ Фото на подарок не сохранено");
+            await ctx.editMessageText("❌ Холст на подарок не сохранено");
             return ctx.scene.leave();
           }
         }

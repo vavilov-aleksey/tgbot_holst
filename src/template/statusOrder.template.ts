@@ -14,7 +14,7 @@ export const statusNotFoundTemplate = Handlebars.compile(`
 export const statusInProgressTemplate = Handlebars.compile(`
 🔄 <b>Ваш заказ находится в работе</b>
 
-📦 Статус: <b>Фото печатаются</b>
+📦 Статус: <b>Холсты печатаются</b>
 📅 Ожидаемая готовность: в течение 5-7 рабочих дней
 
 📌 <b>Небольшое уточнение:</b> сейчас много заказов, поэтому в редких случаях срок может увеличиться до <b>18-20 дней</b>.

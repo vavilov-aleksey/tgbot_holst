@@ -11,10 +11,10 @@ export const orderConfirmCardTemplate = Handlebars.compile<{
 }>(`
 🧾 <b>Ваш заказ:</b>
 
-✅ <b>Количество фото:</b> {{photosCount}} шт.  
+✅ <b>Количество холстов:</b> {{photosCount}} шт.  
 {{#if giftCount}}🎁 <b>В подарок:</b> {{giftCount}} шт.{{/if}}
-✅ <b>Тип фото:</b> {{printTypeName}} - {{printType}} рублей за фото 
-✅ <b>Стоимость фото:</b> {{pricePhoto}} рублей
+✅ <b>Тип холста:</b> {{printTypeName}} - {{printType}} рублей за холст 
+✅ <b>Стоимость холста:</b> {{pricePhoto}} рублей
 ✅ <b>Доставка:</b> {{priceDelivery}} рублей
 
 💸 <b>Итоговая сумма:</b> {{totalPrice}} рублей
@@ -30,8 +30,8 @@ export const orderConfirmCertificateTemplate = Handlebars.compile<{
 }>(`
 🧾 <b>Ваш заказ:</b>
 
-✅ <b>Количество фото:</b> {{photosCount}} шт.  
-✅ <b>Тип фото:</b> {{printTypeName}}
+✅ <b>Количество холстов:</b> {{photosCount}} шт.  
+✅ <b>Тип холста:</b> {{printTypeName}}
 ✅ <b>Сертификат:</b> покрывает весь заказ
 ✅ <b>Доставка:</b> бесплатно по сертификату
 
@@ -50,8 +50,8 @@ export const orderConfirmCertificateOverPriceTemplate = Handlebars.compile<{
 }>(`
 🧾 <b>Ваш заказ:</b>
 
-✅ <b>Количество фото:</b> {{photosCount}} шт.  
-✅ <b>Тип фото:</b> {{printTypeName}} - {{printType}} руб/фото
+✅ <b>Количество холстов:</b> {{photosCount}} шт.  
+✅ <b>Тип холста:</b> {{printTypeName}} - {{printType}} руб/холст
 ✅ <b>Сертификат:</b> покрывает {{certificateCount}} холст
 ✅ <b>Дополнительно:</b> {{overCount}} холст
 ✅ <b>Доставка:</b> бесплатно по сертификату

@@ -46,7 +46,7 @@ export const handleStartAction = async (ctx: TBotContext) => {
     }),
     {
       ...createInlineKeyboard([
-        { label: "Заказать фото", action: SHOW_IMPORTANT_INFO },
+        { label: "Заказать холст", action: SHOW_IMPORTANT_INFO },
         { label: "Возник вопрос", action: FAQ_ROUTE },
       ]),
       link_preview_options: { is_disabled: true },
