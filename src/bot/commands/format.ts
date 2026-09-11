@@ -12,7 +12,7 @@ export class FormatCommands extends Command {
   handle() {
     this.bot.action("format", async (ctx) => {
       await ctx.replyWithVideo({
-        source: fs.createReadStream("./assets/video_tg_bot.MP4"),
+        source: fs.createReadStream("./assets/video_tg_bot.mp4"),
       });
 
       ctx.replyWithHTML(

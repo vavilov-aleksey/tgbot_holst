@@ -94,7 +94,7 @@ export class FaqCommands extends Command {
       try {
         await ctx.replyWithVideo(
           {
-            source: fs.createReadStream("./assets/video_tg_bot.MP4"),
+            source: fs.createReadStream("./assets/video_tg_bot.mp4"),
           },
           {
             caption: configInfo.text,
