@@ -12,11 +12,12 @@ import {
   startCdekInfoTemplate,
 } from "../../template/cdek.template";
 import { CdekService } from "../../services/Cdek/CdekService";
-import { WEIGHT_PHOTO } from "../../app/constants/constants.order";
 import { SELECT_DELIVERY_CDEK_NEXT_STEP_ROUTE } from "../../configs/routes";
 import { useSessionInfo } from "../../hooks";
 import { editMessageText } from "../../features/editMessageText";
 import { pluralize } from "../../utils/pluralize";
+import { PRICE_PRINT_TYPE_BIG } from "../../app/constants/constants.price";
+import { getWeightHolst } from "../../features/getWeightHolst";
 
 const getMinCount = (price: number) => {
   if (price < 500) return 1;
@@ -79,13 +80,16 @@ export class DeliveryIndexCdekScenes {
           return;
         }
 
-        const weight = Math.max(1, Math.round(WEIGHT_PHOTO));
+        const { getPhotoInfo } = useSessionInfo(ctx);
+        const typePrint = getPhotoInfo()?.type || PRICE_PRINT_TYPE_BIG;
+
+        const weightPhoto = getWeightHolst(typePrint, 1);
 
         try {
           const { setDeliveryInfo, setMinCountOrder } = useSessionInfo(ctx);
           const tariff = await cdekService.calculateTariffForPvz({
             deliveryPointCode: indexText,
-            weight,
+            weight: weightPhoto,
             pvzInfo,
           });
 
@@ -94,7 +98,7 @@ export class DeliveryIndexCdekScenes {
           setDeliveryInfo("cityCodePvz", pvzInfo?.[0]?.location?.city_code);
           setDeliveryInfo("address", pvzInfo[0]?.location?.address_full);
 
-          console.log(tariff?.total_sum);
+          console.log({ Tariff: tariff?.total_sum, IdPVZ: indexText });
 
           const minCount = getMinCount(Number(tariff?.total_sum));
           setMinCountOrder(minCount);

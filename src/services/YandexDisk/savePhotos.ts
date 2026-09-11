@@ -180,11 +180,11 @@ export const saveAllPhotos = async (ctx: TBotContext, pathToFolder: string) => {
   const photos = getPhotoInfo()?.listId ?? [];
 
   try {
-    console.log(
-      "Количество всех фото: ",
-      getPhotoInfo()?.count,
-      `chatId: ${ctx?.from?.id}`,
-    );
+    // console.log(
+    //   "Количество всех фото: ",
+    //   getPhotoInfo()?.count,
+    //   `chatId: ${ctx?.from?.id}`,
+    // );
     await Promise.all(
       photos.map(async (photoId: string) => {
         try {
@@ -213,10 +213,7 @@ export const saveAllPhotos = async (ctx: TBotContext, pathToFolder: string) => {
 
           // await new Promise((resolve) => setTimeout(resolve, 100));
         } catch (e) {
-          console.error(
-            `Не удалось обработать файл ${photoId}:`,
-            e,
-          );
+          console.error(`Не удалось обработать файл ${photoId}:`, e);
         }
       }),
     );

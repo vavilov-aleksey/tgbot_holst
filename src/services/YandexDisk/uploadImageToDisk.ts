@@ -173,18 +173,18 @@ const uploadWithRetry = async (
         return true;
       }
 
-      console.log({
-        config: {
-          baseURL: result.config.baseURL,
-          method: result.config.method,
-          url: result.config.url,
-          date: result.headers.date,
-        },
-        diskPath,
-        status: result?.status,
-        statusText: result?.statusText,
-        aborted: result?.request?.aborted,
-      });
+      // console.log({
+      //   config: {
+      //     baseURL: result.config.baseURL,
+      //     method: result.config.method,
+      //     url: result.config.url,
+      //     date: result.headers.date,
+      //   },
+      //   diskPath,
+      //   status: result?.status,
+      //   statusText: result?.statusText,
+      //   aborted: result?.request?.aborted,
+      // });
 
       if (attempt < maxRetries - 1) {
         const delay = Math.pow(2, attempt) * 1000;

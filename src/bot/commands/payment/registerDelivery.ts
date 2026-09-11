@@ -4,9 +4,9 @@ import { successOrderCdek } from "../../../template/sucessPayment";
 import { createInlineKeyboard } from "../../../utils";
 import { TRACKING_CDEK_TRACKING_URL } from "../../../app/constants/constants.tracking";
 import { CdekService } from "../../../services/Cdek/CdekService";
-import { WEIGHT_PHOTO } from "../../../app/constants/constants.order";
 import { googleCdekInfoService } from "../../../services/Google/GoogleCdekInfoService";
 import { consoleLogWithTime } from "../../../utils/consoleLogWithTime";
+import { getWeightHolst } from "../../../features/getWeightHolst";
 
 export const registerDelivery = async (ctx: TBotContext) => {
   await registerCdek(ctx);
@@ -67,7 +67,11 @@ const registerCdek = async (ctx: TBotContext) => {
   } = useSessionInfo(ctx);
 
   const orderNumber = getPaymentInfo()?.orderId!;
-  const weightPhoto = Math.round(WEIGHT_PHOTO * getPhotoInfo()?.count!);
+
+  const weightPhoto = getWeightHolst(
+    getPhotoInfo().type!,
+    getPhotoInfo()?.count!,
+  );
 
   const { idPvz, cityCodePvz, phone, userName } = getDeliveryInfo();
   try {

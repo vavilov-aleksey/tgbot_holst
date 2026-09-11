@@ -60,7 +60,7 @@ export class SavePhotoScenes {
     });
 
     savePhotoScenes.on(["document"], (ctx) => {
-      console.log(ctx);
+      // console.log(ctx);
       return simpleManager.handlePhoto(ctx);
     });
 
@@ -141,7 +141,7 @@ class SmartPhotoManager {
       fileId = file_id;
       fileSize = file_size;
 
-      console.log(ctx.message);
+      // console.log(ctx.message);
 
       if (fileSize > 0) {
         setPhotosInfoListId(fileId);

@@ -46,14 +46,15 @@ class GoogleCertificateService extends GoogleBaseService {
       const row = allData[i];
       if (
         row[CELL_CERTIFICATE] &&
-        row[CELL_CERTIFICATE].toString().trim() === numberCertificate.trim()
+        row[CELL_CERTIFICATE].toString().toUpperCase().trim() ===
+          numberCertificate.toUpperCase().trim()
       ) {
-        console.log({
-          rowNumber: i + 1, // +1 потому что в Google Sheets строки начинаются с 1
-          quantity: row[CELL_QUANTITY], // колонка C - количество
-          certificateNumber: row[CELL_CERTIFICATE],
-          usageDate: row[CELL_USE_DATE] || null, // колонка H - дата использования
-        });
+        // console.log({
+        //   rowNumber: i + 1, // +1 потому что в Google Sheets строки начинаются с 1
+        //   quantity: row[CELL_QUANTITY], // колонка C - количество
+        //   certificateNumber: row[CELL_CERTIFICATE],
+        //   usageDate: row[CELL_USE_DATE] || null, // колонка H - дата использования
+        // });
 
         return {
           alreadyUsed: !!row[CELL_USE_DATE], // если сертификат уже использован

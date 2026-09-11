@@ -51,7 +51,7 @@ export type TContextSession = {
       listId: Array<string>;
       // если загружали фото через яндекс.диск
       count: number;
-      // Тип за 7/9р
+      // Тип 40*50 or 50*70
       type?: TContextPrintType;
       // ссылка на яндекс.диск
       pathDisk?: string;
