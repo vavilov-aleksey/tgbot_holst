@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
 
 export const savePhotoSceneTemplate = Handlebars.compile<{
-  minCountOrder: number;
+  minCountOrder: string;
 }>(`
 <tg-emoji emoji-id="5443127283898405358">📥</tg-emoji> <b>Загрузите изображения для печати</b>
 
@@ -12,7 +12,7 @@ export const savePhotoSceneTemplate = Handlebars.compile<{
 
 Мы обработаем каждое изображение и <b>сообщим вам, когда все они будут готовы</b> к оформлению заказа.
 
-❗ <b>Минимальный заказ:</b> {{minCountOrder}} холста.
+❗ <b>Минимальный заказ:</b> {{minCountOrder}}.
 `);
 
 export const finalSavePhotoSceneTemplate = Handlebars.compile<{

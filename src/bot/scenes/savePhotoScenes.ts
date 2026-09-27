@@ -14,6 +14,7 @@ import {
 import { useGlobalState } from "../../hooks/useGlobalState";
 import { editMessageText } from "../../features/editMessageText";
 import { loaderCreateOrder } from "../../template/sucessPayment";
+import { pluralize } from "../../utils/pluralize";
 
 export class SavePhotoScenes {
   constructor(private bot: any) {}
@@ -31,7 +32,9 @@ export class SavePhotoScenes {
       const minCountOrder = getMinCountOrder();
 
       await editMessageText(ctx, {
-        message: savePhotoSceneTemplate({ minCountOrder: minCountOrder }),
+        message: savePhotoSceneTemplate({
+          minCountOrder: `${minCountOrder} ${pluralize(minCountOrder, "холст", "холста", "холстов")}`,
+        }),
       });
     });
 
