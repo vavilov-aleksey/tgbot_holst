@@ -16,9 +16,9 @@ export const savePhotoSceneTemplate = Handlebars.compile<{
 `);
 
 export const finalSavePhotoSceneTemplate = Handlebars.compile<{
-  photoCount: number;
+  photoCount: string;
 }>(`
-<tg-emoji emoji-id="5424972470023104089">🔥</tg-emoji> <b>Супер! Уже {{photoCount}} изображений</b>
+<tg-emoji emoji-id="5424972470023104089">🔥</tg-emoji> <b>Супер! Уже {{photoCount}}</b>
 
 ➕ <b>Загружайте ещё изображения</b> — не ограничивайте себя!
 Мы обработаем их и сообщим о готовности.

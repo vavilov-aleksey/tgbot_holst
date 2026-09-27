@@ -181,7 +181,7 @@ class SmartPhotoManager {
             } else {
               message = await ctx.replyWithHTML(
                 finalSavePhotoSceneTemplate({
-                  photoCount: currentState.photoCount,
+                  photoCount: `${currentState.photoCount} ${pluralize(currentState.photoCount, "изображение", "изображения", "изображений")}`,
                 }),
                 createInlineKeyboard([
                   { label: "🚀 Оформить заказ", action: "Оформить заказ" },
