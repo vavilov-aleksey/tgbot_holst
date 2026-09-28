@@ -31,7 +31,7 @@ const giftText = (info: TContextSession["user"]["orderInfo"]) => {
   }
 
   if (certificate?.type === CertificateEnum.bonusPerValue) {
-    return `${certificate.count} холст(а) в подарок за каждые 10 холстов`;
+    return `${certificate.count} холст(а) в подарок за каждые 3 холста`;
   }
 
   return null;

@@ -59,10 +59,10 @@ export const useOrderResult = (
   }
 
   if (typeCertificate === CertificateEnum.bonusPerValue) {
-    const countBonus = Math.floor(countPhoto / 110) * freePhoto;
+    const countBonus = Math.floor(countPhoto / 3) * freePhoto;
 
     const resultCountCalculation =
-      countPhoto >= 110 ? countPhoto - countBonus : countPhoto;
+      countPhoto >= 3 ? countPhoto - countBonus : countPhoto;
 
     return {
       numberOfPhoto: countPhoto,

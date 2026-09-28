@@ -57,5 +57,5 @@ export const selectedPaymentMethodSuccessBonusPerValueTemplate =
   }>(`
 <tg-emoji emoji-id="5206607081334906820">✅</tg-emoji> <b>Сертификат подтвержден!</b>
 
-🎁 <b>Ваш номинал:</b> {{count}} в подарок за каждые 10 холстов
+🎁 <b>Ваш номинал:</b> {{count}} в подарок за каждые 3 холста
 `);
