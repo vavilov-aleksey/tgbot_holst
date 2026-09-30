@@ -12,9 +12,9 @@ export const createJpegFileForCertificate = async (
   const saveFilename = `${id}_temp_image`;
 
   // Читаем PDF файл
-  let pdfBuffer = await fs.promises.readFile(
+  let pdfBuffer = (await fs.promises.readFile(
     `./assets/certificate_${countPhoto}.pdf`,
-  );
+  )) as Buffer<ArrayBufferLike>;
 
   try {
     pdfBuffer = await addTextToPdfCertificate(pdfBuffer, phoneText);
