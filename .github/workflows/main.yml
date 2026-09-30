@@ -35,6 +35,13 @@ jobs:
               sudo apt-get install -y imagemagick libheif1
             fi
             
+            if ! command -v redis-server >/dev/null 2>&1; then
+              sudo apt-get update
+              sudo apt-get install -y redis-server
+              sudo systemctl enable --now redis-server
+              redis-cli ping
+            fi
+  
             echo "Installing dependencies..."
             npm install  # или bun install
             
@@ -44,5 +51,6 @@ jobs:
             echo "Restarting application..."
             
             pm2 start dist/app.js --name "holstBot"
+            pm2 start dist/worker.js --name "holstWorker" --no-autorestart=false 
             
             echo "Deployment completed successfully!"

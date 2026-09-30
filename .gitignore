@@ -6,3 +6,8 @@ sessions.json
 sessions-backups/
 credentialsGoogle.json
 services-account.json
+sessions.db
+sessions.db-wal
+sessions.db-shm
+dump.rdb
+*.rdb

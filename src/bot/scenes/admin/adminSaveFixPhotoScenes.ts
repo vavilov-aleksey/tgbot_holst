@@ -3,10 +3,9 @@ import { SCENE_ADMIN_SAVE_FIX_PHOTO } from "../../../app/constants/constants.sce
 import { createInlineKeyboard } from "../../../utils";
 import { ADMIN_SAVE_FIX_PHOTO_ROUTE } from "../../../configs/routes";
 import { sceneReset } from "../../commands/sceneReset";
-import { getMockContext } from "../../../features/getMockContext";
-import { createFolderOnlyFixPhoto } from "../../../features/createFolderForUserInfo";
-import { TBotContext } from "../../../app/types";
 import { yaDiskService } from "../../../services/YandexDisk";
+import { sessionStorage } from "../../../services/sessionStorage";
+import { adminQueue } from "../../../queues/admin.queue";
 
 export class AdminSaveFixPhotoScenes {
   instanceBot: any;
@@ -27,7 +26,7 @@ export class AdminSaveFixPhotoScenes {
 
 Пример:
 328252246
-/TGBOT/Август 2026/23_08_2026/7 988 898-89-89 9p (Оплачен TG_BOT)
+/TGBOT/Сентябрь 2026/23_09_2026/7 988 898-89-89 9p (Оплачен TG_BOT)
 `);
         return ctx.wizard.next();
       },
@@ -69,9 +68,11 @@ export class AdminSaveFixPhotoScenes {
           return;
         }
 
-        const userContext = await getMockContext(this.instanceBot, userId);
+        const session =
+          sessionStorage.get(`${userId}`) ??
+          sessionStorage.get(`${userId}:${userId}`);
 
-        const photosInfo = userContext?.session?.user?.photosInfo;
+        const photosInfo = session?.user?.photosInfo;
 
         const lengthPhoto = !!photosInfo?.count
           ? photosInfo.count
@@ -97,36 +98,14 @@ export class AdminSaveFixPhotoScenes {
 
           if (ctx.callbackQuery.data === "send_mailing") {
             try {
-              const mockContext = await getMockContext(
-                this.instanceBot,
-                ctx.wizard.state.userId,
-              );
-              await ctx.replyWithHTML("Восстановление...");
+              await ctx.replyWithHTML("🕓 Восстановление запущено...");
 
-              await createFolderOnlyFixPhoto(
-                mockContext as TBotContext,
-                ctx.wizard.state.nameFolder,
-              );
-              await ctx.replyWithHTML(
-                `✅ Фото восстановлены для ${ctx.wizard.state.userId}`,
-                createInlineKeyboard([
-                  {
-                    label: "Восстановить ещё",
-                    action: ADMIN_SAVE_FIX_PHOTO_ROUTE,
-                  },
-                ]),
-              );
-            } catch (e) {
-              await ctx.replyWithHTML(
-                "🚫 Ошибка при восстановлении!",
-                createInlineKeyboard([
-                  {
-                    label: "Восстановить ещё",
-                    action: ADMIN_SAVE_FIX_PHOTO_ROUTE,
-                  },
-                ]),
-              );
-            }
+              await adminQueue.add("fix_photo", {
+                userId: ctx.wizard.state.userId,
+                nameFolder: ctx.wizard.state.nameFolder,
+                fromId: ctx.from?.id,
+              });
+            } catch (e) {}
 
             // Выходим из сцены
             return ctx.scene.leave();

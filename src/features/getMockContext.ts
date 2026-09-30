@@ -1,56 +1,39 @@
 import { TBotContext } from "../app/types";
+import { Telegraf } from "telegraf";
+import { sessionStorage } from "../services/sessionStorage";
 
 // использовать в app.ts
-export const getMockContext = async (instanceBot: any, userId: string) => {
-  const db = await instanceBot.localSession.DB.getState();
-  const sessions = db.sessions;
+export const getMockContext = async (
+  telegraf: Telegraf<TBotContext>,
+  userId: string | number,
+) => {
+  const session =
+    sessionStorage.get(`${userId}`) ??
+    sessionStorage.get(`${userId}:${userId}`);
 
-  if (!sessions || !Array.isArray(sessions)) {
-    console.log("❌ Sessions not found");
-    await instanceBot.bot.telegram.sendMessage(
-      userId,
-      "❌ Ошибка: сессии не найдены",
-    );
-    return;
-  }
-
-  // Ищем сессию пользователя
-  const userSessionObj = sessions.find(
-    (session) =>
-      session?.id === userId || session?.id === `${userId}:${userId}`,
-  );
-
-  if (!userSessionObj || !userSessionObj.data) {
-    console.log("❌ Session not found for user:", userId);
-    await instanceBot.bot.telegram.sendMessage(
-      userId,
-      "❌ Сессия не найдена. Начните с /start",
-    );
+  if (!session) {
+    console.log("❌ Sessions not found", userId);
     return;
   }
 
   // Создаем контекст для обработчиков
-  const sessionKey = userSessionObj.id;
   const mockCtx = {
-    session: userSessionObj.data,
-    from: { id: parseInt(userId) },
-    telegram: instanceBot.bot.telegram,
+    session: session,
+    from: { id: parseInt(`${userId}`) },
+    telegram: telegraf.telegram,
     reply: (text: string, extra?: any) =>
-      instanceBot.bot.telegram.sendMessage(userId, text, extra),
+      telegraf.telegram.sendMessage(userId, text, extra),
     replyWithHTML: (text: string, extra?: any) =>
-      instanceBot.bot.telegram.sendMessage(userId, text, {
+      telegraf.telegram.sendMessage(userId, text, {
         ...extra,
         parse_mode: "HTML",
       }),
     deleteMessage: (messageId: number) =>
-      instanceBot.bot.telegram.deleteMessage(userId, messageId),
+      telegraf.telegram.deleteMessage(userId, messageId),
     replyWithPhoto: (photo: any, extra?: any) =>
-      instanceBot.bot.telegram.sendPhoto(userId, photo, extra),
+      telegraf.telegram.sendPhoto(userId, photo, extra),
     persistSession: async () => {
-      await instanceBot.localSession.saveSession(
-        sessionKey,
-        userSessionObj.data,
-      );
+      await sessionStorage.save(`${userId}:${userId}`, session);
     },
   } as TBotContext;
 

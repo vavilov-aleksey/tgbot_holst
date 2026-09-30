@@ -109,5 +109,6 @@ const registerCdek = async (ctx: TBotContext) => {
   } catch (e) {
     // отправлять кому ошибку?
     console.error("Ошибка формирования заказа СДЭК:", e);
+    throw e;
   }
 };

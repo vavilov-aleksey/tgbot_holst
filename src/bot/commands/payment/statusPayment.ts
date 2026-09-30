@@ -14,8 +14,9 @@ import { googleReportService } from "../../../services/Google/GoogleReportServic
 import { googleCertificateService } from "../../../services/Google/GoogleCertificateService";
 import { CertificateEnum } from "../../../app/types/certificateType";
 import { registerDelivery } from "./registerDelivery";
+import { paymentQueue } from "../../../queues/payment.queue";
 
-const runPostPaymentProcessing = async (ctx: TBotContext) => {
+export const runPostPaymentProcessing = async (ctx: TBotContext) => {
   const { setIsGlobalLoading, getOrderInfo } = useSessionInfo(ctx);
 
   try {
@@ -36,6 +37,7 @@ const runPostPaymentProcessing = async (ctx: TBotContext) => {
     }
   } catch (error) {
     console.error("Post-payment processing error:", error);
+    throw error;
   } finally {
     await setIsGlobalLoading(false);
   }
@@ -72,7 +74,9 @@ export const statusPayment = async (ctx: TBotContext) => {
       });
 
       runsInBackground = true;
-      void runPostPaymentProcessing(ctx);
+      await ctx.persistSession?.();
+      await paymentQueue.add("status_payment", { userId: ctx?.from?.id! });
+      // void runPostPaymentProcessing(ctx);
       return;
     }
 
@@ -103,7 +107,9 @@ export const successStatusPayment = async (
   setPaymentInfo({ paymentDate });
 
   await successStatusText(ctx, amount);
-  void runPostPaymentProcessing(ctx);
+  await ctx.persistSession?.();
+  await paymentQueue.add("status_payment", { userId: ctx?.from?.id! });
+  // void runPostPaymentProcessing(ctx);
 };
 
 export const saveReportGoogle = async (
@@ -132,7 +138,7 @@ export const saveReportGoogle = async (
       return `${data.orderId}\nПодарок доставка, ${numberCertificate}`;
     }
     if (typeOrder === CertificateEnum.bonusPerValue) {
-      return `${data.orderId}\nПодарок по бонусу за 100 изображений, ${numberCertificate}`;
+      return `${data.orderId}\nПодарок по бонусу за 3 холста, ${numberCertificate}`;
     }
     return `${data.orderId}`;
   };

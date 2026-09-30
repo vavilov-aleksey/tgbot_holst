@@ -1,7 +1,6 @@
 import { GetEnvKey, TGetEnvKey } from "./features/getEnvKey";
 import { Telegraf } from "telegraf";
 import { Command } from "./bot/commands/command";
-import LocalSession from "telegraf-session-local";
 import { config } from "./configs/config";
 import express from "express";
 import {
@@ -16,11 +15,14 @@ import { START_ROUTE } from "./configs/routes";
 import { IS_DEVELOPMENT_MODE } from "./app/constants/constants.settings";
 import { NotificationService } from "./services/notificationService";
 import { consoleLogWithTime } from "./utils/consoleLogWithTime";
-import { cleanupOldSessions } from "./utils/cleanupOldSessions";
 import { useSessionInfo } from "./hooks";
 import { commandsProvider } from "./bot/commands";
 import { scenesProvider } from "./bot/scenes";
 import { handleCertificateSuccessPayment } from "./bot/commands/certificate";
+import { getSessionKey, sessionMiddleware } from "./services/sessionMiddleware";
+import { sessionStorage } from "./services/sessionStorage";
+import { getMockContext } from "./features/getMockContext";
+import { cleanupOldSessions } from "./utils/cleanupOldSessions";
 
 class Bot {
   bot: Telegraf<TBotContext>;
@@ -29,7 +31,6 @@ class Bot {
   private serverPort: number;
   private timer: NodeJS.Timeout | null;
   private messageInfoId: any | null;
-  private localSession: any;
 
   constructor(private readonly getEnvKey: TGetEnvKey) {
     this.timer = null;
@@ -41,17 +42,12 @@ class Bot {
     this.expressApp = express();
     this.serverPort = Number(this.getEnvKey.get("PORT")) || 3002;
 
-    // установка сессии (FileAsync — без writeFileSync на каждый апдейт)
-    this.localSession = new LocalSession({
-      database: "sessions.json",
-      storage: LocalSession.storageFileAsync,
-    });
-    this.bot.use(this.localSession.middleware());
+    this.bot.use(sessionMiddleware());
     this.bot.use((ctx, next) => {
+      const key = getSessionKey(ctx);
       ctx.persistSession = async () => {
-        const key = this.localSession.getSessionKey(ctx);
         if (!key) return;
-        await this.localSession.saveSession(key, ctx.session);
+        sessionStorage.save(key, ctx.session);
       };
       return next();
     });
@@ -125,9 +121,7 @@ class Bot {
   };
 
   async init() {
-    // Ждём инициализации async lowdb, иначе getSession/saveSession на старте могут упасть
-    await this.localSession.DB;
-    await cleanupOldSessions(this.localSession);
+    await cleanupOldSessions();
 
     this.bot.use(scenesProvider(this));
 
@@ -232,58 +226,10 @@ class Bot {
             return;
           }
 
-          // Получаем сессию из базы
-          const db = await this.localSession.DB.getState();
-          const sessions = db.sessions;
-
-          if (!sessions || !Array.isArray(sessions)) {
-            console.log("❌ Sessions not found");
-            await this.bot.telegram.sendMessage(
-              userId,
-              "❌ Ошибка: сессии не найдены",
-            );
-            return;
-          }
-
-          // Ищем сессию пользователя
-          const userSessionObj = sessions.find(
-            (session) =>
-              session?.id === userId || session?.id === `${userId}:${userId}`,
-          );
-
-          if (!userSessionObj || !userSessionObj.data) {
-            console.log("❌ Session not found for user:", userId);
-            await this.bot.telegram.sendMessage(
-              userId,
-              "❌ Сессия не найдена. Начните с /start",
-            );
-            return;
-          }
-
-          // Создаем контекст для обработчиков
-          const sessionKey = userSessionObj.id;
-          const mockCtx = {
-            session: userSessionObj.data,
-            from: { id: parseInt(userId) },
-            telegram: this.bot.telegram,
-            reply: (text: string, extra?: any) =>
-              this.bot.telegram.sendMessage(userId, text, extra),
-            replyWithHTML: (text: string, extra?: any) =>
-              this.bot.telegram.sendMessage(userId, text, {
-                ...extra,
-                parse_mode: "HTML",
-              }),
-            deleteMessage: (messageId: number) =>
-              this.bot.telegram.deleteMessage(userId, messageId),
-            replyWithPhoto: (photo: any, extra?: any) =>
-              this.bot.telegram.sendPhoto(userId, photo, extra),
-            persistSession: async () => {
-              await this.localSession.saveSession(
-                sessionKey,
-                userSessionObj.data,
-              );
-            },
-          } as TBotContext;
+          const mockCtx = (await getMockContext(
+            this.bot,
+            userId,
+          )) as TBotContext;
 
           consoleLogWithTime(
             `💸 Payment data: ${JSON.stringify(paymentData)}`,
