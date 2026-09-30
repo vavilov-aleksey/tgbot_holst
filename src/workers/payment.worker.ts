@@ -5,10 +5,13 @@ import { Telegraf } from "telegraf";
 import { GetEnvKey } from "../features/getEnvKey";
 import { runPostPaymentProcessing } from "../bot/commands/payment/statusPayment";
 import { TBotContext } from "../app/types";
+import https from "node:https";
 
-const telegraf = new Telegraf(
-  new GetEnvKey().get("TG_TOKEN"),
-) as Telegraf<TBotContext>;
+const telegramAgent = new https.Agent({ keepAlive: false });
+
+const telegraf = new Telegraf(new GetEnvKey().get("TG_TOKEN"), {
+  telegram: { agent: telegramAgent },
+}) as Telegraf<TBotContext>;
 
 export const paymentWorker = new Worker(
   "payment_queue",

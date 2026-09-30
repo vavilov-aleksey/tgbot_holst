@@ -3,6 +3,7 @@ import { Telegraf } from "telegraf";
 import { Command } from "./bot/commands/command";
 import { config } from "./configs/config";
 import express from "express";
+import https from "node:https";
 import {
   declinedByTimeoutStatusText,
   saveReportGoogle,
@@ -24,6 +25,8 @@ import { sessionStorage } from "./services/sessionStorage";
 import { getMockContext } from "./features/getMockContext";
 import { cleanupOldSessions } from "./utils/cleanupOldSessions";
 
+const telegramAgent = new https.Agent({ keepAlive: false });
+
 class Bot {
   bot: Telegraf<TBotContext>;
   commands: Command[] = [];
@@ -38,6 +41,7 @@ class Bot {
 
     this.bot = new Telegraf<TBotContext>(this.getEnvKey.get("TG_TOKEN"), {
       handlerTimeout: 9_000_000,
+      telegram: { agent: telegramAgent },
     });
     this.expressApp = express();
     this.serverPort = Number(this.getEnvKey.get("PORT")) || 3002;
@@ -289,6 +293,7 @@ void bot.init();
 // git pull origin master
 // bun run build
 // pm2 start dist/app.js --name holstBot
+// pm2 start dist/worker.js --name holstWorker
 // pm2 flush
 // pm2 logs --lines 10000
 // Настройка nginx
