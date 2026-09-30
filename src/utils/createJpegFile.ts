@@ -17,7 +17,7 @@ export const createJpegFile = async (
   const id = uuidv4().substring(0, 8);
   const filePath = `./${id}_temp_file.pdf`;
   const saveFilename = `${id}_temp_image`;
-  let pdfBuffer = Buffer.from(pdfData, "binary");
+  let pdfBuffer = Buffer.from(pdfData, "binary") as Buffer<ArrayBufferLike>;
 
   const { scale, converterType, text, additionalText } = options;
 
