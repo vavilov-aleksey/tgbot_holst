@@ -132,7 +132,7 @@ export const saveReportGoogle = async (
       return `${data.orderId}\nПодарок доставка, ${numberCertificate}`;
     }
     if (typeOrder === CertificateEnum.bonusPerValue) {
-      return `${data.orderId}\nПодарок по бонусу за 100 изображений, ${numberCertificate}`;
+      return `${data.orderId}\nПодарок по бонусу за 3 холста, ${numberCertificate}`;
     }
     return `${data.orderId}`;
   };
