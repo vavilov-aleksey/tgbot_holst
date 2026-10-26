@@ -7,13 +7,10 @@ import { TBotContext } from "../app/types";
 import { createFolderOnlyFixPhoto } from "../features/createFolderForUserInfo";
 import { createInlineKeyboard } from "../utils";
 import { ADMIN_SAVE_FIX_PHOTO_ROUTE } from "../configs/routes";
-import https from "node:https";
 
-const telegramAgent = new https.Agent({ keepAlive: false });
-
-const telegraf = new Telegraf(new GetEnvKey().get("TG_TOKEN"), {
-  telegram: { agent: telegramAgent },
-}) as Telegraf<TBotContext>;
+const telegraf = new Telegraf(
+  new GetEnvKey().get("TG_TOKEN"),
+) as Telegraf<TBotContext>;
 
 export const adminWorker = new Worker(
   "admin_queue",
