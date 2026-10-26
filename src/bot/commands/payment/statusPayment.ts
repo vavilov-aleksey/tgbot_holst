@@ -29,7 +29,12 @@ export const runPostPaymentProcessing = async (ctx: TBotContext) => {
     const certificateRowGoogle = getOrderInfo()?.certificate?.rowInGoogle;
 
     if (certificateRowGoogle) {
-      if (getOrderInfo()?.certificate?.type !== CertificateEnum.bonusPerValue) {
+      // Пока костыль. Чтобы бонусную доставку не записывать в использованные
+      if (
+        [CertificateEnum.certificate, CertificateEnum.freeGift].includes(
+          getOrderInfo()?.certificate?.type!,
+        )
+      ) {
         await googleCertificateService.setCertificateDateUsage(
           certificateRowGoogle,
         );
