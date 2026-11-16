@@ -13,7 +13,9 @@ const DOWNLOAD_MAX_RETRIES = 5;
 const DOWNLOAD_CONNECT_TIMEOUT = 30000;
 const DOWNLOAD_IDLE_TIMEOUT = 30000;
 
-const axiosInstance = axios.create();
+const axiosInstance = axios.create({
+  timeout: 30000,
+});
 
 axiosInstance.defaults.raxConfig = {
   instance: axiosInstance,

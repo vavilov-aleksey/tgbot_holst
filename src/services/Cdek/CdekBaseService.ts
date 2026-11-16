@@ -62,6 +62,7 @@ export abstract class CdekBaseService {
           Authorization: `Bearer ${this.token}`,
           "Content-Type": "application/json",
         },
+        timeout: 30000,
       });
     } catch (error) {
       console.error("Ошибка авторизации CDEK:", error);
@@ -107,8 +108,7 @@ export abstract class CdekBaseService {
       return response.data;
     } catch (error) {
       const responseData = (error as any)?.response?.data as
-        | CdekApiError
-        | undefined;
+        CdekApiError | undefined;
       const firstError = responseData?.requests?.[0]?.errors?.[0];
       const message =
         firstError?.message || responseData?.message || "Неизвестная ошибка";

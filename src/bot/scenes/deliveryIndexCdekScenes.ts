@@ -98,8 +98,6 @@ export class DeliveryIndexCdekScenes {
           setDeliveryInfo("cityCodePvz", pvzInfo?.[0]?.location?.city_code);
           setDeliveryInfo("address", pvzInfo[0]?.location?.address_full);
 
-          console.log({ Tariff: tariff?.total_sum, IdPVZ: indexText });
-
           const minCount = getMinCount(Number(tariff?.total_sum));
           setMinCountOrder(minCount);
 

@@ -13,6 +13,7 @@ import * as rax from "retry-axios";
 const client = axios.create({
   baseURL: "https://cloud-api.yandex.net",
   headers: { Authorization: new GetEnvKey().get("YANDEX_TOKEN") },
+  timeout: 30000,
 });
 
 rax.attach(client);
